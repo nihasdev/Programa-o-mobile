@@ -1,93 +1,86 @@
-class Veiculo {
-    constructor(marca, modelo) {
-        if (this.constructor === Veiculo) {
-            throw new Error("Não é possível instanciar uma classe abstrata.");
-        }
+class Animal {
 
-        this._marca = marca;
-        this._modelo = modelo;
+    constructor(nome, comprimento, patas, cor, ambiente, velocidade) {
+
+        this.nome = nome;
+        this.comprimento = comprimento;
+        this.patas = patas;
+        this.cor = cor;
+        this.ambiente = ambiente;
+        this.velocidade = velocidade;
     }
 
-    calcularConsumo() {
-        throw new Error("O método calcularConsumo() deve ser implementado.");
-    }
+    dados() {
 
-    exibirInformacoes() {
-        console.log("Marca:", this._marca);
-        console.log("Modelo:", this._modelo);
-        console.log("Consumo:", this.calcularConsumo().toFixed(2), "km/l");
-    }
-
-    getMarca() {
-        return this._marca;
-    }
-
-    getModelo() {
-        return this._modelo;
+        console.log("Nome: " + this.nome);
+        console.log("Comprimento: " + this.comprimento + " cm");
+        console.log("Patas: " + this.patas);
+        console.log("Cor: " + this.cor);
+        console.log("Ambiente: " + this.ambiente);
+        console.log("Velocidade: " + this.velocidade + " m/s");
     }
 }
 
-class Carro extends Veiculo {
-    constructor(marca, modelo, cilindrada) {
-        super(marca, modelo);
-        this.cilindrada = cilindrada;
+class Peixe extends Animal {
+
+    constructor(nome, comprimento, patas, cor,
+                ambiente, velocidade, caracteristica) {
+
+        super(nome, comprimento, patas, cor, ambiente, velocidade);
+
+        this.caracteristica = caracteristica;
     }
 
-    calcularConsumo() {
-        return 15.0 - (this.cilindrada / 200);
-    }
+    dadosPeixe() {
 
-    exibirInformacoes() {
-        super.exibirInformacoes();
-        console.log("Cilindrada:", this.cilindrada);
-        console.log("---------------------------");
-    }
-}
+        this.dados();
 
-class Moto extends Veiculo {
-    constructor(marca, modelo, cilindradas) {
-        super(marca, modelo);
-        this.cilindradas = cilindradas;
-    }
-
-    calcularConsumo() {
-        return 30.0 - (this.cilindradas / 100.0);
-    }
-
-    exibirInformacoes() {
-        super.exibirInformacoes();
-        console.log("Cilindradas:", this.cilindradas);
-        console.log("---------------------------");
+        console.log("Característica: " + this.caracteristica);
     }
 }
 
-class Caminhao extends Veiculo {
-    constructor(marca, modelo, capacidadeCarga) {
-        super(marca, modelo);
-        this.capacidadeCarga = capacidadeCarga;
+class Mamifero extends Animal {
+
+    constructor(nome, comprimento, patas, cor,
+                ambiente, velocidade, alimento) {
+
+        super(nome, comprimento, patas, cor, ambiente, velocidade);
+
+        this.alimento = alimento;
     }
 
-    calcularConsumo() {
-        return 5.0 - (this.capacidadeCarga / 1000.0);
-    }
+    dadosMamifero() {
 
-    exibirInformacoes() {
-        super.exibirInformacoes();
-        console.log("Capacidade de carga:", this.capacidadeCarga, "kg");
-        console.log("---------------------------");
-    }
-}
+        this.dados();
 
-class Main {
-    static main() {
-        const carro = new Carro("Toyota", "Corolla", 2000);
-        const moto = new Moto("Honda", "CG 160", 160);
-        const caminhao = new Caminhao("Volvo", "FH", 3000);
-
-        carro.exibirInformacoes();
-        moto.exibirInformacoes();
-        caminhao.exibirInformacoes();
+        console.log("Alimento: " + this.alimento);
     }
 }
 
-Main.main();
+const tubarao = new Peixe(
+    "Tubarão",
+    300,
+    0,
+    "Cinzento",
+    "Mar",
+    1.5,
+    "Barbatanas e cauda"
+);
+
+const ursocanada = new Mamifero(
+    "Urso-do-canadá",
+    180,
+    4,
+    "Vermelho",
+    "Terra",
+    0.5,
+    "Mel"
+);
+
+console.log("=== DADOS DO TUBARÃO ===");
+tubarao.dadosPeixe();
+
+console.log("");
+
+console.log("=== DADOS DO URSO DO CANADÁ ===");
+ursocanada.dadosMamifero();
